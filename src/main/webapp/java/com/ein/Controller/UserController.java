@@ -17,6 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -30,58 +31,87 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/login",method= RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String login(@RequestParam("username")String username, @RequestParam("password")String password, HttpServletRequest request, HttpServletResponse response){
-
-        System.out.println("login start");
-
+    public String login(@RequestParam("username")String username,
+                        @RequestParam("password")String password,
+                        HttpServletRequest request,
+                        HttpServletResponse response)
+    {
         logger.info("username = "+username+"; password = "+password);
-
         Result result = userService.loginByPost(username,password);
-
-
         if (result.isSuccess()){
-            request.getSession().setAttribute("user_id", request.getSession().getId());
-//            request.getSession().setAttribute("user_msg",result.getMessage());
-            request.getSession().setMaxInactiveInterval(50000);  // Session保存
-            Cookie cookie = new Cookie("JSESSIONID", request.getSession().getId());
-            Cookie cookieUsername = new Cookie("username",username);
-            cookie.setMaxAge(50000);  // 客户端的JSESSIONID也保存
-            cookie.setPath("/");
-            cookieUsername.setPath("/");
-            response.addCookie(cookie);
-            response.addCookie(cookieUsername);
-
-//            String jsonStr = JSON.toJSON(user).toString();
-            System.out.println("login success");
+            prepareLogin(request,response);
             return JSON.toJSON(result).toString();
         }else {
             return JSON.toJSON(result).toString();
         }
     }
 
+    private void prepareLogin(HttpServletRequest request, HttpServletResponse response){
+        int survivalTime = 50000;
+
+        HttpSession session = request.getSession();
+        prepareLoginSession(session,survivalTime);
+
+        String username = request.getParameter("username");
+        String sessionId = request.getSession().getId();
+        ConcurrentHashMap<String,String> cookieValueMap = new ConcurrentHashMap<>();
+        cookieValueMap.put("JSESSIONID",sessionId);
+        cookieValueMap.put("username",username);
+        ConcurrentHashMap<String,Cookie>  cookieMap =prepareLoginCookies(cookieValueMap,survivalTime);
+
+        response.addCookie(cookieMap.get("JSESSIONID"));
+        response.addCookie(cookieMap.get("username"));
+    }
+
+    private ConcurrentHashMap<String,Cookie> prepareLoginCookies(ConcurrentHashMap<String,String> cookieValueMap, int survivalTime){
+        Cookie cookie = new Cookie("JSESSIONID",cookieValueMap.get("JSESSIONID"));
+        Cookie cookieUsername = new Cookie("username",cookieValueMap.get("username"));
+        cookie.setMaxAge(survivalTime);  // 客户端的JSESSIONID也保存
+        cookie.setPath("/");
+        cookieUsername.setPath("/");
+
+        ConcurrentHashMap<String,Cookie> cookieMap = new ConcurrentHashMap<>();
+        cookieMap.put("JSESSIONID",cookie);
+        cookieMap.put("username",cookieUsername);
+        return cookieMap;
+    }
+
+    private  void prepareLoginSession(HttpSession session, int survivalTime){
+        session.setAttribute("JSESSIONID", session.getId());
+        session.setMaxInactiveInterval(survivalTime);  // Session保存
+    }
+
+
     @ResponseBody
     @RequestMapping(value = "/login",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String login(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
-        System.out.println(session.getId());
-
-        String username = "";
-
-        if (session.getAttribute("user_id")!=null&&session.getAttribute("user_id").equals(session.getId())){
-//            String user_msg =  session.getAttribute("user_msg").toString();
-            Cookie cookies[] = request.getCookies();
-            for (Cookie cookie:cookies) {
-                if (cookie.getName().equals("username")) {
-                    username = cookie.getValue();
-                    System.out.println(username);
-                }
-            }
-            Result result =  userService.getUserByUsername(username);
-//            System.out.println(result.getMessage());
-            return  JSON.toJSON(result).toString();
-        }else {
-            return JSON.toJSON(new Result(false,"cheak is login falied")).toString();
+        Cookie cookies[] = request.getCookies();
+        if (isUserLoginBefore(session)){
+            return restoreAndReturnUserData(cookies);
         }
+        return JSON.toJSON(new Result(false,"login falied")).toString();
+    }
+    private boolean isUserLoginBefore(HttpSession session){
+        boolean isUser_idCorrect;
+        boolean isHaveUser_id = session.getAttribute("JSESSIONID") != null;
+        if (isHaveUser_id){
+            String nowSessionId = session.getId();
+            isUser_idCorrect = session.getAttribute("JSESSIONID").equals(nowSessionId);
+            return isUser_idCorrect;
+        }
+        return false;
+    }
+    private String restoreAndReturnUserData(Cookie cookies[]){
+        String username;
+        for (Cookie cookie:cookies) {
+            if (cookie.getName().equals("username")) {
+                username = cookie.getValue();
+                Result result =  userService.getUserByUsername(username);
+                return  JSON.toJSON(result).toString();
+            }
+        }
+        return JSON.toJSON(new Result(false,"cookies do not have username")).toString();
     }
 
     @ResponseBody
@@ -89,17 +119,25 @@ public class UserController {
     public String logout(HttpServletRequest request,HttpServletResponse response) {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(500);
-        System.out.println(session.getId());
 
-        if (session.getAttribute("user_id")!=null && session.getAttribute("user_id").equals(session.getId())) {
-            Cookie cookie = new Cookie("JSESSIONID",null);
-            cookie.setMaxAge(0);
-            cookie.setPath("/");
-            response.addCookie(cookie);
-            session.removeAttribute("user");
+        if (isUserLoginBefore(session)) {
+            prepareLogout(session, response);
             return JSON.toJSON(new Result(true,"logout success")).toString();
         }
         return JSON.toJSON(new Result(false,"logout falied")).toString();
+    }
+
+    private void prepareLogout(HttpSession session, HttpServletResponse response){
+        Cookie cookie = new Cookie("JSESSIONID",null);
+        Cookie cookieUsername = new Cookie("username",null);
+        cookieUsername.setMaxAge(0);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        cookieUsername.setPath("/");
+
+        session.removeAttribute("JSESSIONID");
+        response.addCookie(cookie);
+        response.addCookie(cookieUsername);
     }
 
     @ResponseBody
