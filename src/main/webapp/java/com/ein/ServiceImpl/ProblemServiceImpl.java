@@ -1,6 +1,7 @@
 package com.ein.ServiceImpl;
 
 import com.alibaba.fastjson.JSON;
+import com.ein.Dao.ProblemDao;
 import com.ein.DaoImpl.ProblemDaoImpl;
 import com.ein.Model.Problem;
 import com.ein.Service.ProblemService;
@@ -19,7 +20,7 @@ import java.util.List;
 public class ProblemServiceImpl implements ProblemService {
 
     @Resource(name = "ProblemDao")
-    private ProblemDaoImpl problemDao;
+    private ProblemDao problemDao;
     @Override
     public void save(Problem entity) {
 

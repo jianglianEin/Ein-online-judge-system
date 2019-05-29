@@ -5,6 +5,7 @@ import com.ein.Model.Problem;
 import com.ein.ServiceImpl.ProblemServiceImpl;
 import com.ein.ServiceImpl.UserServiceImpl;
 import com.ein.Utils.Result;
+import com.ein.Utils.Tools;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @RequestMapping(value = "/problem")
@@ -23,12 +25,15 @@ public class ProblemController {
     @Resource(name = "ProblemService")
     private ProblemServiceImpl problemService;
 
+    @Resource(name = "Tools")
+    private Tools tools;
+
     private static final Log logger = LogFactory.getLog(ProblemController.class);
 
     @ResponseBody
     @RequestMapping(value = "/searchProblem",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String searchProblem(HttpServletRequest request) throws Exception {
-        String problemId = request.getParameter("problemId");
+    public String searchProblem(HttpServletRequest request,
+                                @RequestParam("problemId")String problemId) throws Exception {
         if (problemId.isEmpty()){
             return JSON.toJSON(new Result(false,"输入题目号为空")).toString();
         }else {
@@ -46,67 +51,60 @@ public class ProblemController {
                       @RequestParam("outputData")String outputData,
                       @RequestParam("example")String example,
                       @RequestParam("testData")String testData) throws Exception {
-
-
-        Problem problem = new Problem();
-        problem.setTitle(title);
-        problem.setDiscription(discription);
-        problem.setInputData(inputData);
-        problem.setOutputData(outputData);
-        problem.setExample(example);
-        problem.setTestData(testData);
-
-        problem.setCommit(0);
-        problem.setPass(0);
-
+        Problem problem = prepareNewProblem(title,discription,inputData,outputData,example,testData,0,0);
         Result result = problemService.addByPost(problem);
-
         return JSON.toJSON(result).toString();
+    }
+
+    private Problem prepareNewProblem(String title,
+                                      String discription,
+                                      String inputData,
+                                      String outputData,
+                                      String example,
+                                      String testData,
+                                      int commit,
+                                      int pass){
+        ConcurrentHashMap<String, Object> valueMap = new ConcurrentHashMap<>();
+        valueMap.put("title",title);
+        valueMap.put("discription",discription);
+        valueMap.put("inputData",inputData);
+        valueMap.put("outputData",outputData);
+        valueMap.put("example",example);
+        valueMap.put("testData",testData);
+        valueMap.put("commit",commit);
+        valueMap.put("pass",pass);
+        Problem problem = tools.fillBean(valueMap,Problem.class);
+        return problem;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getProblems",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String getProblems(HttpServletRequest request) throws Exception {
-        int page = Integer.parseInt(request.getParameter("pageNum"));
-        int problemsNum = Integer.parseInt(request.getParameter("problemsNum"));
-
+    public String getProblems(@RequestParam("pageNum")int page,
+                              @RequestParam("problemsNum")int problemsNum) throws Exception {
         Result result = problemService.searchProblemsByPage(page,problemsNum);
-
         return JSON.toJSON(result).toString();
 
     }
 
     @ResponseBody
     @RequestMapping(value = "/showDetailedProblem",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String showDetailedProblem(HttpServletRequest request) throws Exception {
-        String problemId = request.getParameter("problemId");
-
+    public String showDetailedProblem(@RequestParam("problemId")String problemId) throws Exception {
         Result result = problemService.searchProblemByGet(problemId);
-
-
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
-
         }else {
-            //可处理错误
             return JSON.toJSON(result).toString();
         }
     }
 
     @ResponseBody
     @RequestMapping(value = "/delete",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String delete(HttpServletRequest request) throws Exception {
-        String problemId = request.getParameter("problemId");
-        int id = Integer.parseInt(problemId);
-
+    public String delete(HttpServletRequest request,
+                         @RequestParam("problemId")int id) throws Exception {
         Result result = problemService.RemoveProblemById(id);
-
-
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
-
         }else {
-            //可处理错误
             return JSON.toJSON(result).toString();
         }
     }
@@ -114,9 +112,7 @@ public class ProblemController {
     @ResponseBody
     @RequestMapping(value = "/getCount",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String getCount(HttpServletRequest request){
-
         Result result = problemService.searchProblemCount();
-
         return JSON.toJSON(result).toString();
     }
 }

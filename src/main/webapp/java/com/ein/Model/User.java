@@ -2,6 +2,7 @@ package com.ein.Model;
 
 import java.io.Serializable;
 
+
 public class User implements Serializable{
     private Integer id;
     private String rights;
@@ -14,8 +15,27 @@ public class User implements Serializable{
     private String grade;
     private String QQ;
     private String email;
-    private boolean sex = false;
+    private boolean sex;
     private  String discription;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", rights='" + rights + '\'' +
+                ", passNum=" + passNum +
+                ", studentId='" + studentId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", icon='" + icon + '\'' +
+                ", major='" + major + '\'' +
+                ", grade='" + grade + '\'' +
+                ", QQ='" + QQ + '\'' +
+                ", email='" + email + '\'' +
+                ", sex=" + sex +
+                ", discription='" + discription + '\'' +
+                '}';
+    }
     
     public User (){
         super();

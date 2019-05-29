@@ -28,7 +28,6 @@ public class UserController {
 
     private static final Log logger = LogFactory.getLog(UserController.class);
 
-
     @ResponseBody
     @RequestMapping(value = "/login",method= RequestMethod.POST,produces="text/html;charset=UTF-8")
     public String login(@RequestParam("username")String username,
@@ -36,7 +35,6 @@ public class UserController {
                         HttpServletRequest request,
                         HttpServletResponse response)
     {
-        logger.info("username = "+username+"; password = "+password);
         Result result = userService.loginByPost(username,password);
         if (result.isSuccess()){
             prepareLogin(request,response);
@@ -81,7 +79,6 @@ public class UserController {
         session.setMaxInactiveInterval(survivalTime);  // Session保存
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/login",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String login(HttpServletRequest request) throws Exception {
@@ -92,6 +89,7 @@ public class UserController {
         }
         return JSON.toJSON(new Result(false,"login falied")).toString();
     }
+
     private boolean isUserLoginBefore(HttpSession session){
         boolean isUser_idCorrect;
         boolean isHaveUser_id = session.getAttribute("JSESSIONID") != null;
@@ -102,6 +100,7 @@ public class UserController {
         }
         return false;
     }
+
     private String restoreAndReturnUserData(Cookie cookies[]){
         String username;
         for (Cookie cookie:cookies) {
@@ -142,37 +141,31 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/register",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String register(HttpServletRequest request) throws Exception {
-        String studentId = request.getParameter("studentId");
-//        System.out.println(studentId);
-        String username = request.getParameter("username");
-//        System.out.println(username);
-        String password = request.getParameter("password");
-//        System.out.println(password);
-
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setStudentId(studentId);
-
-
+    public String register(HttpServletRequest request,
+                           @RequestParam("username")String username,
+                           @RequestParam("password")String password,
+                           @RequestParam("studentId")String studentId) throws Exception {
+        User user = prepareRegisterUser(username,password,studentId);
         Result result = userService.registerByPost(user);
         return JSON.toJSON(result).toString();
     }
 
+    private User prepareRegisterUser(String username, String password, String studentId){
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        user.setStudentId(studentId);
+        return user;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/showDetailedUser",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String showDetailedUser(HttpServletRequest request) throws Exception {
-        String userId = request.getParameter("id");
-        int id = Integer.parseInt(userId);
-
-        Result result = userService.getUserById(id);
-
+    public String showDetailedUser(HttpServletRequest request,
+                                   @RequestParam("id")int userId) throws Exception {
+        Result result = userService.getUserById(userId);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
-
         }else {
-            //可处理错误
             return JSON.toJSON(result).toString();
         }
     }
@@ -191,9 +184,27 @@ public class UserController {
                             @RequestParam("email")String email,
                             @RequestParam("sex")boolean sex,
                             @RequestParam("discription")String discription) throws Exception {
+        User user = prepareUpdataUser(username,studentId,password,rights,icon,major,grade,QQ,email,sex,discription);
+        Result result = userService.changeMsgByPost(user);
+        if (result.isSuccess()){
+            return JSON.toJSON(result).toString();
+        }else {
+            return JSON.toJSON(result).toString();
+        }
+    }
 
+    private User prepareUpdataUser(String username,
+                                   String studentId,
+                                   String password,
+                                   String rights,
+                                   String icon,
+                                   String major,
+                                   String grade,
+                                   String QQ,
+                                   String email,
+                                   boolean sex,
+                                   String discription){
         User user = new User();
-
         if (!username.isEmpty())user.setUsername(username);
         if (!studentId.isEmpty())user.setStudentId(studentId);
         if (!password.isEmpty()) user.setPassword(password);
@@ -206,69 +217,50 @@ public class UserController {
         user.setSex(sex);
         if (!discription.isEmpty())user.setDiscription(discription);
 
-
-        Result result = userService.changeMsgByPost(user);
-
-        if (result.isSuccess()){
-            return JSON.toJSON(result).toString();
-
-        }else {
-            //可处理错误
-            return JSON.toJSON(result).toString();
-        }
+        return user;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getRankUser",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String getRankUser(HttpServletRequest request){
-
-        int page = Integer.parseInt(request.getParameter("pageNum"));
-        int rankNum = Integer.parseInt(request.getParameter("rankNum"));
-
+    public String getRankUser(HttpServletRequest request,
+                              @RequestParam("pageNum")int page,
+                              @RequestParam("rankNum")int rankNum){
         Result result = userService.searchRankByPage(page,rankNum);
-
         return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/get_resent_rank",method=RequestMethod.GET ,produces="text/html;charset=UTF-8")
-    public String get_resent_rank(HttpServletRequest request){
-
+    public String get_resent_rank(){
         int searchNum = 5;
-
         Result result = userService.get_resent_rank(searchNum);
-
         return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/confirmPassword",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String confirmPassword(HttpServletRequest request){
-        String studentId = request.getParameter("studentId");
-        String old_password = request.getParameter("old_password");
-        String password = request.getParameter("password");
-        Result result = userService.getPasswordByStudentId(studentId);
-        if (result.isSuccess()){
-            String passwordInSql = result.getMessage();
+    public String confirmPassword(HttpServletRequest request,
+                                  @RequestParam("studentId")String studentId,
+                                  @RequestParam("old_password")String old_password,
+                                  @RequestParam("password")String password){
+        Result pwResult = userService.getPasswordByStudentId(studentId);
+        if (pwResult.isSuccess()){
+            String passwordInSql = pwResult.getMessage();
             if (passwordInSql.equals(old_password)){
                 return JSON.toJSON(new Result(true,password)).toString();
             }else {
                 return JSON.toJSON(new Result(false,"密码错误")).toString();
             }
-
         }else {
-            return JSON.toJSON(new Result(false,result.getMessage())).toString();
+            return JSON.toJSON(new Result(false,pwResult.getMessage())).toString();
         }
 
     }
 
-
     @ResponseBody
     @RequestMapping(value = "/getCount",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String getCount(HttpServletRequest request){
-
+    public String getCount(){
         Result result = userService.searchUserCount();
-
         return JSON.toJSON(result).toString();
     }
 }

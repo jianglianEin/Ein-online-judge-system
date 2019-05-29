@@ -1,13 +1,49 @@
 package com.ein.Utils;
 
+import com.alibaba.fastjson.JSON;
 import com.ein.Model.Problem;
 import com.ein.Model.Solution;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
+@Component(value = "Tools")
 public class Tools {
-    public static String readFile(String pathname) {
+
+    public <T> T fillBean(ConcurrentHashMap<String,Object> valueMap, Class<T> cls) {
+        T bean = null;
+        try {
+            bean = cls.newInstance();
+            Field[] fields = cls.getDeclaredFields();
+            for(Field field : fields) {
+                String fieldName = field.getName();
+                Method method = cls.getDeclaredMethod("set"
+                        + fieldName.substring(0, 1).toUpperCase()
+                        + fieldName.substring(1), field.getType());
+                if (field.getType().toString().equals("boolean")&&valueMap.get(fieldName)==null){
+                    method.invoke(bean, false);
+                }else {
+                    method.invoke(bean, valueMap.get(fieldName));
+                }
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return bean;
+    }
+
+    public Object analysisResult(Result result, Class className){
+        System.out.println(className);
+        return  JSON.parseObject(result.getMessage(),className);
+    }
+
+    public String readFile(String pathname) {
         // 绝对路径或相对路径都可以，写入文件时演示相对路径,读取以上路径的input.txt文件
         //防止文件建立或读取失败，用catch捕捉错误并打印，也可以throw;
         //不关闭文件会导致资源的泄露，读写文件都同理
@@ -31,7 +67,7 @@ public class Tools {
         return data;
     }
 
-    public static HashMap<String ,Object>  testJavaData(Problem problem,String[] cmds,String questionRootPath) throws FileNotFoundException {
+    public HashMap<String ,Object>  testJavaData(Problem problem,String[] cmds,String questionRootPath) throws FileNotFoundException {
         HashMap<String,String> result = null;
 
         String testRootPath = questionRootPath;
@@ -119,7 +155,7 @@ public class Tools {
     }
 
 
-    public static HashMap<String ,Object>  testCppData(Problem problem,String[] cmds,String questionRootPath) throws FileNotFoundException {
+    public HashMap<String ,Object>  testCppData(Problem problem,String[] cmds,String questionRootPath) throws FileNotFoundException {
         HashMap<String, String> result = null;
 
         String testRootPath = questionRootPath;

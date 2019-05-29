@@ -1,7 +1,7 @@
 package com.ein.ServiceImpl;
 
 import com.alibaba.fastjson.JSON;
-import com.ein.Dao.SolutionOfCompetitionDao;
+import com.ein.Dao.*;
 import com.ein.DaoImpl.ProblemDaoImpl;
 import com.ein.DaoImpl.SolutionDaoImpl;
 import com.ein.DaoImpl.UserDaoImpl;
@@ -27,13 +27,15 @@ import java.util.List;
 public class SolutionServiceImpl implements SolutionService {
 
     @Resource(name = "SolutionDao")
-    private SolutionDaoImpl solutionDao;
+    private SolutionDao solutionDao;
     @Resource(name = "ProblemDao")
-    private ProblemDaoImpl problemDao;
+    private ProblemDao problemDao;
     @Resource(name = "UserDao")
-    private UserDaoImpl userDao;
+    private UserDao userDao;
     @Resource(name = "User_SolutionDao")
-    private User_SolutionDaoImpl user_solutionDao;
+    private User_SolutionDao user_solutionDao;
+    @Resource(name = "Tools")
+    private Tools tools;
     @Override
     public void save(Solution entity) {
 
@@ -112,7 +114,7 @@ public class SolutionServiceImpl implements SolutionService {
                 javaCmds[1] = javaCmd2;
                 try {
                     System.out.println("testJavaData start");
-                    testResult = Tools.testJavaData(problem,javaCmds,questionRootPath);
+                    testResult = tools.testJavaData(problem,javaCmds,questionRootPath);
                     System.out.println(testResult);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -135,7 +137,7 @@ public class SolutionServiceImpl implements SolutionService {
                 cppCmds[0] = cppCmd1;
                 cppCmds[1] = cppCmd2;
                 try {
-                    testResult = Tools.testCppData(problem,cppCmds,questionRootPath);
+                    testResult = tools.testCppData(problem,cppCmds,questionRootPath);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     return new Result(false,"测试数据失败！");
@@ -283,7 +285,7 @@ public class SolutionServiceImpl implements SolutionService {
         try {
             user_solution = user_solutionDao.searchUser_SolutionByUserAndSolution(userAndSolution);
             String codePath = user_solution.getSolution().getCode();
-            user_solution.getSolution().setCode(Tools.readFile(codePath));
+            user_solution.getSolution().setCode(tools.readFile(codePath));
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,e.toString());
@@ -337,7 +339,7 @@ public class SolutionServiceImpl implements SolutionService {
             for (User_Solution user_solution:user_solutions){
                 if (user_solution.getSolution().getProblem().getId() == Integer.parseInt(problemId)
                         &&user_solution.getSolution().getLanguageType().equals(languageType)){
-                    String rawCode = Tools.readFile(user_solution.getSolution().getCode());
+                    String rawCode = tools.readFile(user_solution.getSolution().getCode());
                     String showCode = "";
 
                     switch (user_solution.getSolution().getLanguageType()){

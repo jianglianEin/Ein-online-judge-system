@@ -27,8 +27,8 @@ public class ProblemController {
 
     @ResponseBody
     @RequestMapping(value = "/searchProblem",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String searchProblem(HttpServletRequest request) throws Exception {
-        String problemId = request.getParameter("problemId");
+    public String searchProblem(HttpServletRequest request,
+                                @RequestParam("problemId")String problemId) throws Exception {
         if (problemId.isEmpty()){
             return JSON.toJSON(new Result(false,"输入题目号为空")).toString();
         }else {
@@ -46,8 +46,6 @@ public class ProblemController {
                       @RequestParam("outputData")String outputData,
                       @RequestParam("example")String example,
                       @RequestParam("testData")String testData) throws Exception {
-
-
         Problem problem = new Problem();
         problem.setTitle(title);
         problem.setDiscription(discription);
@@ -55,7 +53,6 @@ public class ProblemController {
         problem.setOutputData(outputData);
         problem.setExample(example);
         problem.setTestData(testData);
-
         problem.setCommit(0);
         problem.setPass(0);
 
@@ -63,6 +60,8 @@ public class ProblemController {
 
         return JSON.toJSON(result).toString();
     }
+
+//    private Problem prepareNewProblem()
 
     @ResponseBody
     @RequestMapping(value = "/getProblems",method= RequestMethod.GET,produces="text/html;charset=UTF-8")

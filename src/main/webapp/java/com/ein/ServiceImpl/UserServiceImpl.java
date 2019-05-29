@@ -1,6 +1,7 @@
 package com.ein.ServiceImpl;
 
 import com.alibaba.fastjson.JSON;
+import com.ein.Dao.UserDao;
 import com.ein.DaoImpl.UserDaoImpl;
 import com.ein.Model.User;
 import com.ein.Service.UserService;
@@ -17,7 +18,7 @@ import java.util.List;
 @Service("UserService")
 public class UserServiceImpl implements UserService {
     @Resource(name = "UserDao")
-    private UserDaoImpl userDao;
+    private UserDao userDao;
 
     @Override
     public void save(User entity) {

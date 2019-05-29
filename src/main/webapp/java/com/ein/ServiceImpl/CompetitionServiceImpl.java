@@ -1,8 +1,7 @@
 package com.ein.ServiceImpl;
 
 import com.alibaba.fastjson.JSON;
-import com.ein.Dao.Competition_ProblemDao;
-import com.ein.Dao.SolutionOfCompetitionDao;
+import com.ein.Dao.*;
 import com.ein.DaoImpl.*;
 import com.ein.Model.*;
 import com.ein.Service.CompetitionService;
@@ -26,17 +25,22 @@ public class CompetitionServiceImpl implements CompetitionService {
     private SolutionOfCompetitionDao solutionOfCompetitionDao;
 
     @Resource(name = "CompetitionDao")
-    private CompetitionDaoImpl competitionDao;
+    private CompetitionDao competitionDao;
 
     @Resource(name = "Competition_ProblemDao")
     private Competition_ProblemDao competition_problemDao;
 
     @Resource(name = "ProblemDao")
-    private ProblemDaoImpl problemDao;
+    private ProblemDao problemDao;
+
     @Resource(name = "UserDao")
-    private UserDaoImpl userDao;
+    private UserDao userDao;
+
     @Resource(name = "User_SolutionOfCompetitionDao")
-    private User_SolutionOfCompetitionDaoImpl user_solutionOfCompetitionDao;
+    private User_SolutionOfCompetitionDao user_solutionOfCompetitionDao;
+
+    @Resource(name = "Tools")
+    private Tools tools;
 
 
 
@@ -253,7 +257,7 @@ public class CompetitionServiceImpl implements CompetitionService {
                 if (user_solutionOfCompetition.getSolutionOfCompetition().getProblem().getId() == Integer.parseInt(problemId)
                         &&user_solutionOfCompetition.getSolutionOfCompetition().getLanguageType().equals(languageType)
                         &&user_solutionOfCompetition.getSolutionOfCompetition().getCompetition().getId()==Integer.parseInt(competitionId)){
-                    String rawCode = Tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode());
+                    String rawCode = tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode());
                     String showCode = "";
 
                     switch (user_solutionOfCompetition.getSolutionOfCompetition().getLanguageType()){
@@ -351,7 +355,7 @@ public class CompetitionServiceImpl implements CompetitionService {
                 javaCmds[1] = javaCmd2;
                 try {
                     System.out.println("testJavaData start");
-                    testResult = Tools.testJavaData(problem,javaCmds,questionRootPath);
+                    testResult = tools.testJavaData(problem,javaCmds,questionRootPath);
                     System.out.println(testResult);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -374,7 +378,7 @@ public class CompetitionServiceImpl implements CompetitionService {
                 cppCmds[0] = cppCmd1;
                 cppCmds[1] = cppCmd2;
                 try {
-                    testResult = Tools.testCppData(problem,cppCmds,questionRootPath);
+                    testResult = tools.testCppData(problem,cppCmds,questionRootPath);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                     return new Result(false,"测试数据失败！");
@@ -495,7 +499,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         }
 
         if (user_solutionOfCompetition!=null){
-            user_solutionOfCompetition.getSolutionOfCompetition().setCode(Tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode()));
+            user_solutionOfCompetition.getSolutionOfCompetition().setCode(tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode()));
             return new Result(true, JSON.toJSON(user_solutionOfCompetition).toString());
         }else {
             return new Result(false,"没有该比赛解答！");

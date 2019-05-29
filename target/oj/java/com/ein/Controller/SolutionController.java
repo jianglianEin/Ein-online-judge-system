@@ -31,15 +31,13 @@ public class SolutionController {
     @ResponseBody
     @RequestMapping(value = "/commit",method= RequestMethod.POST,produces="text/html;charset=UTF-8")
     public String commit(HttpServletRequest request,
-                      @RequestParam("code")String code,
-                      @RequestParam("languageType")String languageType,
-                      @RequestParam("problemId")String problemId,
+                         @RequestParam("code")String code,
+                         @RequestParam("languageType")String languageType,
+                         @RequestParam("problemId")String problemId,
                          @RequestParam("username")String username) throws Exception {
 
         String codeRootPath = request.getSession().getServletContext().getRealPath("code")+"/";
         String questionRootPath = request.getSession().getServletContext().getRealPath("question")+"/";
-//        String path = request.getSession().getServletContext().getRealPath("oj")+"/";
-//        System.out.println(path);
 
         Result problemResult = problemService.searchProblemByGet(problemId);
 

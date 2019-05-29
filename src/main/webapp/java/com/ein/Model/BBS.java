@@ -9,6 +9,17 @@ public class BBS implements Serializable{
     private String startDate;
     private String title;
 
+    @Override
+    public String toString() {
+        return "BBS{" +
+                "id=" + id +
+                ", Lz=" + Lz +
+                ", discription='" + discription + '\'' +
+                ", startDate='" + startDate + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
+
     public BBS(){
         super();
     }

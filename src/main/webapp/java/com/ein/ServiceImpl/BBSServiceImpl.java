@@ -1,6 +1,8 @@
 package com.ein.ServiceImpl;
 
 import com.alibaba.fastjson.JSON;
+import com.ein.Dao.BBSDao;
+import com.ein.Dao.User_BBSDao;
 import com.ein.DaoImpl.BBSDaoImpl;
 import com.ein.DaoImpl.User_BBSDaoImpl;
 import com.ein.Model.BBS;
@@ -19,10 +21,10 @@ import java.util.List;
 @Service("BBSService")
 public class BBSServiceImpl implements BBSService {
     @Resource(name = "BBSDao")
-    private BBSDaoImpl bbsDao;
+    private BBSDao bbsDao;
 
     @Resource(name = "User_BBSDao")
-    private User_BBSDaoImpl user_bbsDao;
+    private User_BBSDao user_bbsDao;
 
     @Override
     public void save(BBS entity) {
