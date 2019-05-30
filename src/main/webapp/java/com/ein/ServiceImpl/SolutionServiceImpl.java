@@ -37,22 +37,22 @@ public class SolutionServiceImpl implements SolutionService {
     @Resource(name = "Tools")
     private Tools tools;
     @Override
-    public void save(Solution entity) {
-
+    public Result save(Solution entity) {
+return null;
     }
 
     @Override
-    public void update(Solution entity) {
-
+    public Result update(Solution entity) {
+return null;
     }
 
     @Override
-    public void delete(Serializable id) {
-
+    public Result deleteById(Integer id) {
+return null;
     }
 
     @Override
-    public Solution getById(Serializable id) {
+    public Result getById(Integer id) {
         return null;
     }
 
@@ -345,15 +345,7 @@ public class SolutionServiceImpl implements SolutionService {
                     switch (user_solution.getSolution().getLanguageType()){
                         case "java":
                             String lines[] =  rawCode.split("\n",2);
-
-//                        for (int i = 0;i<lines.length;i++){
-//                            if (i == 0){
-//                                continue;
-//                            }else {
-//                                System.out.println(lines[i]);
-//                                showCode += lines[i]+"\n";
-//                            }
-//                        }
+                            
                             showCode = lines[1];
                             break;
                         default:

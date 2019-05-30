@@ -37,12 +37,12 @@ public class SolutionController {
     public String commit(HttpServletRequest request,
                          @RequestParam("code")String code,
                          @RequestParam("languageType")String languageType,
-                         @RequestParam("problemId")String problemId,
+                         @RequestParam("problemId")int problemId,
                          @RequestParam("username")String username) throws Exception {
 
         String codeRootPath = request.getSession().getServletContext().getRealPath("code")+"/";
         String questionRootPath = request.getSession().getServletContext().getRealPath("question")+"/";
-        Result problemResult = problemService.searchProblemByGet(problemId);
+        Result problemResult = problemService.getById(problemId);
         Problem problem = (Problem) tools.analysisResult(problemResult,Problem.class);
         Solution solution = new Solution();
         solution.setCode(code);

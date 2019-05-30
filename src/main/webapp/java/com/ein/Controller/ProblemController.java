@@ -33,13 +33,9 @@ public class ProblemController {
     @ResponseBody
     @RequestMapping(value = "/searchProblem",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String searchProblem(HttpServletRequest request,
-                                @RequestParam("problemId")String problemId) throws Exception {
-        if (problemId.isEmpty()){
-            return JSON.toJSON(new Result(false,"输入题目号为空")).toString();
-        }else {
-            Result result = problemService.searchProblemByGet(problemId);
-            return JSON.toJSON(result).toString();
-        }
+                                @RequestParam("problemId")int problemId) throws Exception {
+        Result result = problemService.getById(problemId);
+        return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
@@ -52,7 +48,7 @@ public class ProblemController {
                       @RequestParam("example")String example,
                       @RequestParam("testData")String testData) throws Exception {
         Problem problem = prepareNewProblem(title,discription,inputData,outputData,example,testData,0,0);
-        Result result = problemService.addByPost(problem);
+        Result result = problemService.save(problem);
         return JSON.toJSON(result).toString();
     }
 
@@ -81,15 +77,15 @@ public class ProblemController {
     @RequestMapping(value = "/getProblems",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String getProblems(@RequestParam("pageNum")int page,
                               @RequestParam("problemsNum")int problemsNum) throws Exception {
-        Result result = problemService.searchProblemsByPage(page,problemsNum);
+        Result result = problemService.searchByPage(page,problemsNum);
         return JSON.toJSON(result).toString();
 
     }
 
     @ResponseBody
     @RequestMapping(value = "/showDetailedProblem",method=RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String showDetailedProblem(@RequestParam("problemId")String problemId) throws Exception {
-        Result result = problemService.searchProblemByGet(problemId);
+    public String showDetailedProblem(@RequestParam("problemId")int problemId) throws Exception {
+        Result result = problemService.getById(problemId);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
         }else {
@@ -101,7 +97,7 @@ public class ProblemController {
     @RequestMapping(value = "/delete",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
     public String delete(HttpServletRequest request,
                          @RequestParam("problemId")int id) throws Exception {
-        Result result = problemService.RemoveProblemById(id);
+        Result result = problemService.deleteById(id);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
         }else {
@@ -112,7 +108,7 @@ public class ProblemController {
     @ResponseBody
     @RequestMapping(value = "/getCount",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String getCount(HttpServletRequest request){
-        Result result = problemService.searchProblemCount();
+        Result result = problemService.searchCount();
         return JSON.toJSON(result).toString();
     }
 }

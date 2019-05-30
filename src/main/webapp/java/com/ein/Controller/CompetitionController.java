@@ -9,6 +9,7 @@ import com.ein.ServiceImpl.CompetitionServiceImpl;
 import com.ein.ServiceImpl.ProblemServiceImpl;
 import com.ein.ServiceImpl.UserServiceImpl;
 import com.ein.Utils.Result;
+import com.ein.Utils.Tools;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.apache.commons.logging.Log;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Controller
 @RequestMapping(value = "/competition")
@@ -32,15 +34,15 @@ public class CompetitionController {
     @Resource(name = "ProblemService")
     private ProblemServiceImpl problemService;
 
+    @Resource(name = "Tools")
+    private Tools tools;
+
     private static final Log logger = LogFactory.getLog(CompetitionController.class);
 
     @ResponseBody
     @RequestMapping(value = "/getCompetition_Problems",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String getCompetition_Problems(HttpServletRequest request){
-        String competitionId = request.getParameter("competitionId");
-
-        Result result = competitionService.searchCompetition_Problems(competitionId);
-
+    public String getCompetition_Problems(@RequestParam("competitionId")int competitionId){
+        Result result = competitionService.searchCompetition_ProblemsByCompetitionId(competitionId);
         return JSON.toJSON(result).toString();
     }
 
@@ -48,17 +50,11 @@ public class CompetitionController {
 
     @ResponseBody
     @RequestMapping(value = "/showDetailedUser_SolutionOfCompetition",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String showDetailedUser_SolutionOfCompetition(HttpServletRequest request){
-        String user_solutionOfCompetition_id = request.getParameter("user_solutionOfCompetition_id");
-
+    public String showDetailedUser_SolutionOfCompetition(@RequestParam("user_solutionOfCompetition_id")int user_solutionOfCompetition_id){
         Result result = competitionService.searchUser_SolutionOfCompetitionById(user_solutionOfCompetition_id);
-
-
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
-
         }else {
-            //可处理错误
             return JSON.toJSON(result).toString();
         }
     }
@@ -66,109 +62,80 @@ public class CompetitionController {
 
     @ResponseBody
     @RequestMapping(value = "/showDetailedCompetition",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String showDetailedCompetition(HttpServletRequest request){
-        String competitionId = request.getParameter("competitionId");
-
-        Result result = competitionService.searchCompetitionByGet(competitionId);
-
-
+    public String showDetailedCompetition(@RequestParam("competitionId")int competitionId){
+        Result result = competitionService.getById(competitionId);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
-
         }else {
-            //可处理错误
             return JSON.toJSON(result).toString();
         }
     }
 
     @ResponseBody
     @RequestMapping(value = "/add",method= RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String add(HttpServletRequest request,
+    public String add(
                       @RequestParam("sponsor")String sponsor,
                       @RequestParam("title")String title,
                       @RequestParam("startDate")String startDate,
                       @RequestParam("endDate")String endDate,
                       @RequestParam("languageType")String languageType,
                       @RequestParam("discription")String discription) throws Exception {
-
         Result userResult = userService.getUserByUsername(sponsor);
-
-
-        User user = JSON.parseObject(userResult.getMessage(),User.class);
-
-        Competition competition = new Competition();
-        competition.setSponsor(user);
-        competition.setTitle(title);
-        competition.setStartDate(startDate);
-        competition.setEndDate(endDate);
-        competition.setOpen(true);
-        competition.setLanguageType(languageType);
-        competition.setDiscription(discription);
-
-
-        Result result = competitionService.addByPost(competition);
-
+        User user = (User) tools.analysisResult(userResult,User.class);
+        Competition competition = prepareNewCompetition(user,title,startDate,endDate,languageType,discription);
+        Result result = competitionService.save(competition);
         return JSON.toJSON(result).toString();
+    }
+
+    private Competition prepareNewCompetition(User sponsor,
+                                              String title,
+                                              String startDate,
+                                              String endDate,
+                                              String languageType,
+                                              String discription){
+        ConcurrentHashMap<String, Object> valueMap = new ConcurrentHashMap<>();
+        valueMap.put("sponsor",sponsor);
+        valueMap.put("title",title);
+        valueMap.put("startDate",startDate);
+        valueMap.put("endDate",endDate);
+        valueMap.put("languageType",languageType);
+        valueMap.put("discription",discription);
+        Competition competition = tools.fillBean(valueMap,Competition.class);
+        return competition;
     }
 
     @ResponseBody
     @RequestMapping(value = "/getCompetitions",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String getCompetitions(HttpServletRequest request){
-        int page = Integer.parseInt(request.getParameter("page"));
-        int competitionsNum = Integer.parseInt(request.getParameter("competitionsNum"));
-
-        Result result = competitionService.searchCompetitionsByPage(page,competitionsNum);
-
-        return JSON.toJSON(result).toString();
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/switchCompetition",method= RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String switchCompetition(HttpServletRequest request){
-        boolean isOpen =Boolean.parseBoolean(request.getParameter("isOpen"));
-        String competitionId = request.getParameter("competitionId");
-        int id = Integer.parseInt(competitionId);
-
-        Competition competition = new Competition();
-        competition.setId(id);
-        competition.setOpen(isOpen);
-
-
-        Result result = competitionService.changeCompetitionMsgByPost(competition);
-
+    public String getCompetitions(HttpServletRequest request,
+                                  @RequestParam("page")int page,
+                                  @RequestParam("competitionsNum")int competitionsNum){
+        Result result = competitionService.searchByPage(page,competitionsNum);
         return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/get_resent_competition",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String get_resent_competition(HttpServletRequest request){
+    public String get_resent_competition(){
         int searchNum = 5;
-
-        Result result = competitionService.get_resent_competition(5);
-
+        Result result = competitionService.searchResentEntity(searchNum);
         return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/getCount",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String getCount(HttpServletRequest request){
-
-        Result result = competitionService.searchCompetitionCount();
-
+        Result result = competitionService.searchCount();
         return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/showSolutionOfCompetitionByProblemAndLanguageType",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
-    public String showSolutionOfCompetitionByProblemAndLanguageType(HttpServletRequest request){
-        System.out.println("in showSolutionOfCompetitionByProblemAndLanguageType");
-        String competitionId = request.getParameter("competitionId");
-        String problemId = request.getParameter("problemId");
-        String username = request.getParameter("username");
-        String languageType = request.getParameter("languageType");
-
-        Result result = competitionService.searchSolutionOfCompetitionByProblem(competitionId,problemId,username,languageType);
-
+    public String showSolutionOfCompetitionByProblemAndLanguageType(HttpServletRequest request,
+                                                                    @RequestParam("competitionId")int competitionId,
+                                                                    @RequestParam("problemId")int  problemId,
+                                                                    @RequestParam("username")String username,
+                                                                    @RequestParam("languageType")String languageType){
+        Result result = competitionService.searchSolutionOfCompetitionByUsername(competitionId,problemId,username,languageType);
         return JSON.toJSON(result).toString();
     }
 
@@ -177,18 +144,15 @@ public class CompetitionController {
     public String commit(HttpServletRequest request,
                          @RequestParam("code")String code,
                          @RequestParam("languageType")String languageType,
-                         @RequestParam("competitionId")String competitionId,
-                         @RequestParam("problemId")String problemId,
+                         @RequestParam("competitionId")int competitionId,
+                         @RequestParam("problemId")int problemId,
                          @RequestParam("username")String username) throws Exception {
 
         String codeRootPath = request.getSession().getServletContext().getRealPath("CompetitionCode")+"/";
         String questionRootPath = request.getSession().getServletContext().getRealPath("question")+"/";
-//        String path = request.getSession().getServletContext().getRealPath("oj")+"/";
-//        System.out.println(path);
 
-        Result problemResult = problemService.searchProblemByGet(problemId);
-        Result competitionResult = competitionService.searchCompetitionByGet(competitionId);
-
+        Result problemResult = problemService.getById(problemId);
+        Result competitionResult = competitionService.getById(competitionId);
 
         Problem problem = JSON.parseObject(problemResult.getMessage(),Problem.class);
         Competition competition = JSON.parseObject(competitionResult.getMessage(),Competition.class);

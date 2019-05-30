@@ -167,7 +167,7 @@ public class UserController {
     @RequestMapping(value = "/showDetailedUser",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
     public String showDetailedUser(HttpServletRequest request,
                                    @RequestParam("id")int userId) throws Exception {
-        Result result = userService.getUserById(userId);
+        Result result = userService.getById(userId);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
         }else {
@@ -190,7 +190,7 @@ public class UserController {
                             @RequestParam("sex")boolean sex,
                             @RequestParam("discription")String discription) throws Exception {
         User user = prepareUpdataUser(username,studentId,password,rights,icon,major,grade,QQ,email,sex,discription);
-        Result result = userService.changeMsgByPost(user);
+        Result result = userService.update(user);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
         }else {
@@ -230,7 +230,7 @@ public class UserController {
     public String getRankUser(HttpServletRequest request,
                               @RequestParam("pageNum")int page,
                               @RequestParam("rankNum")int rankNum){
-        Result result = userService.searchRankByPage(page,rankNum);
+        Result result = userService.searchByPage(page,rankNum);
         return JSON.toJSON(result).toString();
     }
 
@@ -238,34 +238,24 @@ public class UserController {
     @RequestMapping(value = "/get_resent_rank",method=RequestMethod.GET ,produces="text/html;charset=UTF-8")
     public String get_resent_rank(){
         int searchNum = 5;
-        Result result = userService.get_resent_rank(searchNum);
+        Result result = userService.searchResentEntity(searchNum);
         return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/confirmPassword",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
-    public String confirmPassword(HttpServletRequest request,
+    public String confirmPassword(
                                   @RequestParam("studentId")String studentId,
                                   @RequestParam("old_password")String old_password,
                                   @RequestParam("password")String password){
-        Result pwResult = userService.getPasswordByStudentId(studentId);
-        if (pwResult.isSuccess()){
-            String passwordInSql = pwResult.getMessage();
-            if (passwordInSql.equals(old_password)){
-                return JSON.toJSON(new Result(true,password)).toString();
-            }else {
-                return JSON.toJSON(new Result(false,"密码错误")).toString();
-            }
-        }else {
-            return JSON.toJSON(new Result(false,pwResult.getMessage())).toString();
-        }
-
+        Result result = userService.confirmPassword(studentId,old_password,password);
+        return JSON.toJSON(result).toString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/getCount",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String getCount(){
-        Result result = userService.searchUserCount();
+        Result result = userService.searchCount();
         return JSON.toJSON(result).toString();
     }
 }

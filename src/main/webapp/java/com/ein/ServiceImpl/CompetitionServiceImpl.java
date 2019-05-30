@@ -46,28 +46,46 @@ public class CompetitionServiceImpl implements CompetitionService {
 
 
     @Override
-    public void save(Competition entity) {
+    public Result save(Competition entity) {
+        int insertRow = 0;
+        try {
+            insertRow = competitionDao.addCompetition(entity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,e.toString());
+        }
 
+        if (insertRow==0){
+            return new Result(false,"添加比赛失败");
+        }else {
+            return new Result(true,"添加比赛成功");
+        }
     }
 
     @Override
-    public void update(Competition entity) {
-
+    public Result update(Competition entity) {
+        int updataRow = 0;
+        if (entity!=null){
+            try {
+                updataRow = competitionDao.updataCompetitionProvider(entity);
+            } catch (Exception e) {
+                return new Result(false,e.toString());
+            }
+        }
+        if (updataRow!=0){
+            return new Result(false,"更新比赛信息失败");
+        }else {
+            return new Result(true,""+updataRow);
+        }
     }
 
     @Override
-    public void delete(Serializable id) {
-
+    public Result deleteById(Integer id) {
+return null;
     }
 
     @Override
-    public Competition getById(Serializable id) {
-        return null;
-    }
-
-    @Override
-    public Result searchCompetitionByGet(String competitionId) {
-        int id = Integer.parseInt(competitionId);
+    public Result getById(Integer id) {
         Competition competition = null;
         try {
             competition = competitionDao.searchCompetitionById(id);
@@ -84,33 +102,12 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Result addByPost(Competition competition) {
-        int insertRow = 0;
-        try {
-            insertRow = competitionDao.addCompetition(competition);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false,e.toString());
-        }
-
-        if (insertRow==0){
-            return new Result(false,"添加比赛失败");
-        }else {
-            return new Result(true,"添加比赛成功");
-        }
-    }
-
-    @Override
-    public Result searchCompetitionsByPage(int page, int competitionsNum) {
+    public Result searchByPage(Integer page, Integer pageNum) {
         List<Competition> competitions = null;
-        int startNum = (page-1)*competitionsNum;
-
-
+        int startNum = (page-1)*pageNum;
         HashMap<String,Integer> pageLimit = new HashMap<>();
         pageLimit.put("startNum",startNum);
-        pageLimit.put("competitionsNum",competitionsNum);
-
-
+        pageLimit.put("competitionsNum",pageNum);
         try {
             competitions = competitionDao.searchCompetitionsLimit(pageLimit);
         } catch (Exception e) {
@@ -126,25 +123,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Result changeCompetitionMsgByPost(Competition competition) {
-        int updataRow = 0;
-        if (competition!=null){
-            try {
-                updataRow = competitionDao.updataCompetitionProvider(competition);
-            } catch (Exception e) {
-                return new Result(false,e.toString());
-            }
-        }
-
-        if (updataRow!=0){
-            return new Result(false,"更新比赛信息失败");
-        }else {
-            return new Result(true,""+updataRow);
-        }
-    }
-
-    @Override
-    public Result get_resent_competition(int searchNum) {
+    public Result searchResentEntity(Integer searchNum) {
         List<Competition> competitions = null;
         try {
             competitions = competitionDao.searchCompetitionByTopNum(searchNum);
@@ -160,7 +139,7 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Result searchCompetitionCount() {
+    public Result searchCount() {
         int countNum = 0;
         try {
             countNum = competitionDao.searchCount();
@@ -177,16 +156,14 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Result searchCompetition_Problems(String competitionId) {
-        int id = Integer.parseInt(competitionId);
+    public Result searchCompetition_ProblemsByCompetitionId(int competitionId) {
         List<Competition_Problem> competition_problems = null;
         try {
-            competition_problems = competition_problemDao.searchCompetition_ProblemsByCompetitionId(id);
+            competition_problems = competition_problemDao.searchCompetition_ProblemsByCompetitionId(competitionId);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,e.toString());
         }
-
         if (competition_problems!=null){
             return new Result(true, JSON.toJSON(competition_problems).toString());
         }else {
@@ -196,109 +173,72 @@ public class CompetitionServiceImpl implements CompetitionService {
 
     @Override
     public Result searchUser_SolutionOfCompetitionByGet(String competitionId, String userId) {
-//        System.out.println("in searchUser_SolutionOfCompetitionByGet");
-//        int competition_id = Integer.parseInt(competitionId);
-//        User_Solution user_solution = null;
-//
-//        List<SolutionOfCompetition> solutionOfCompetitions = null;
-//
-//        try {
-//            solutionOfCompetitions = solutionOfCompetitionDao.searchSolutionOfCompetitionByCompetitionId(competition_id);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//        HashMap<String,Integer> userAndSolution = new HashMap<String, Integer>();
-//        userAndSolution.put("user_id",Integer.parseInt(userId));
-//        userAndSolution.put("solution_id",Integer.parseInt(solutionId));
-//        try {
-//            user_solution = user_solutionDao.searchUser_SolutionByUserAndSolution(userAndSolution);
-//            String codePath = user_solution.getSolution().getCode();
-//            user_solution.getSolution().setCode(Tools.readFile(codePath));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return new Result(false,e.toString());
-//        }
-//
-//        if (user_solution!=null){
-//            return new Result(true, JSON.toJSON(user_solution).toString());
-//        }else {
-//            return new Result(false,"没有该解答！");
-//        }
         return  null;
     }
+
     @Override
-    public Result searchSolutionOfCompetitionByProblem(String competitionId,String problemId, String username,String languageType) {
-        System.out.println("in searchSolutionOfCompetitionByProblem");
+    public Result searchSolutionOfCompetitionByUsername(int competitionId,int problemId, String username,String languageType) {
         List<User_SolutionOfCompetition> user_solutionOfCompetitions = null;
-        User user = null;
         try {
-            user = userDao.searchUserByUserName(username);
-            System.out.println("find user");
-            System.out.println(user==null);
+            user_solutionOfCompetitions = getAllSolutionOfCompetitionsByUsername(username);
         } catch (Exception e) {
-            e.printStackTrace();
+            return new Result(false, "没有该用户名的用户");
         }
 
-        try {
-            user_solutionOfCompetitions = user_solutionOfCompetitionDao.searchUser_SolutionsOfCompetitionByUser(String.valueOf(user.getId()));
-            System.out.println("find user_solutionOfCompetitions");
-            System.out.println(user_solutionOfCompetitions.isEmpty());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        if (user_solutionOfCompetitions.isEmpty()){
+        if (user_solutionOfCompetitions == null){
             return new Result(true, "new answer");
         }else {
-            for (User_SolutionOfCompetition user_solutionOfCompetition:user_solutionOfCompetitions){
-                System.out.println("user_solutionOfCompetition.getId(): "+user_solutionOfCompetition.getId());
-                if (user_solutionOfCompetition.getSolutionOfCompetition().getProblem().getId() == Integer.parseInt(problemId)
-                        &&user_solutionOfCompetition.getSolutionOfCompetition().getLanguageType().equals(languageType)
-                        &&user_solutionOfCompetition.getSolutionOfCompetition().getCompetition().getId()==Integer.parseInt(competitionId)){
-                    String rawCode = tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode());
-                    String showCode = "";
-
-                    switch (user_solutionOfCompetition.getSolutionOfCompetition().getLanguageType()){
-                        case "java":
-                            String lines[] =  rawCode.split("\n",2);
-
-//                        for (int i = 0;i<lines.length;i++){
-//                            if (i == 0){
-//                                continue;
-//                            }else {
-//                                System.out.println(lines[i]);
-//                                showCode += lines[i]+"\n";
-//                            }
-//                        }
-                            showCode = lines[1];
-                            break;
-                        default:
-                            showCode = rawCode;
-                            break;
-
-
-                    }
-                    System.out.println("find user_solutionOfCompetition");
-
-                    user_solutionOfCompetition.getSolutionOfCompetition().setCode(showCode);
-
-                    return new Result(true, JSON.toJSON(user_solutionOfCompetition).toString());
+            for (User_SolutionOfCompetition user_solutionOfCompetition : user_solutionOfCompetitions){
+                if (cheakIsAnswerBefore(user_solutionOfCompetition,problemId,competitionId,languageType)){
+                    Result result = setCodeFromUser_SolutionOfCompetition(user_solutionOfCompetition);
+                    return result;
                 }
             }
-
-
             return new Result(true, "new answer");
-
         }
+    }
 
-//
-//        return new Result(false,"没有解答");
+    private Result setCodeFromUser_SolutionOfCompetition(User_SolutionOfCompetition user_solutionOfCompetition){
+        String rawCode = tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode());
+        String showCode = "";
+        switch (user_solutionOfCompetition.getSolutionOfCompetition().getLanguageType()){
+            case "java":
+                String lines[] =  rawCode.split("\n",2);
+                showCode = lines[1];
+                break;
+            default:
+                showCode = rawCode;
+                break;
+        }
+        user_solutionOfCompetition.getSolutionOfCompetition().setCode(showCode);
+        return new Result(true, JSON.toJSON(user_solutionOfCompetition).toString());
+    }
+
+    private List<User_SolutionOfCompetition> getAllSolutionOfCompetitionsByUsername(String username) throws Exception {
+        User user = null;
+        user = userDao.searchUserByUserName(username);
+        try {
+            List<User_SolutionOfCompetition> user_solutionOfCompetitions = user_solutionOfCompetitionDao.searchUser_SolutionsOfCompetitionByUser(user.getId());
+            return user_solutionOfCompetitions;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private boolean cheakIsAnswerBefore(User_SolutionOfCompetition user_solutionOfCompetition ,int problemId, int competitionId, String languageType){
+        return  user_solutionOfCompetition.getSolutionOfCompetition().getProblem().getId() == problemId
+                &&user_solutionOfCompetition.getSolutionOfCompetition().getLanguageType().equals(languageType)
+                &&user_solutionOfCompetition.getSolutionOfCompetition().getCompetition().getId()==competitionId;
     }
 
     @Override
-    public Result commitByPost(SolutionOfCompetition solutionOfCompetition, String username, Competition competition, Problem problem, String codeRootPath, String questionRootPath) {
+    public Result commitByPost(SolutionOfCompetition solutionOfCompetition,
+                               String username,
+                               Competition competition,
+                               Problem problem,
+                               String codeRootPath,
+                               String questionRootPath) {
 
         boolean isFirstCommit = false;
 
@@ -488,21 +428,25 @@ public class CompetitionServiceImpl implements CompetitionService {
     }
 
     @Override
-    public Result searchUser_SolutionOfCompetitionById(String user_solutionOfCompetition_id) {
-        int id = Integer.parseInt(user_solutionOfCompetition_id);
+    public Result searchUser_SolutionOfCompetitionById(int user_solutionOfCompetition_id) {
         User_SolutionOfCompetition user_solutionOfCompetition = null;
         try {
-            user_solutionOfCompetition = user_solutionOfCompetitionDao.searchUser_SolutionsOfCompetitionById(id);
+            user_solutionOfCompetition = user_solutionOfCompetitionDao.searchUser_SolutionsOfCompetitionById(user_solutionOfCompetition_id);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,e.toString());
         }
-
         if (user_solutionOfCompetition!=null){
-            user_solutionOfCompetition.getSolutionOfCompetition().setCode(tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode()));
+            setCode(user_solutionOfCompetition);
             return new Result(true, JSON.toJSON(user_solutionOfCompetition).toString());
         }else {
             return new Result(false,"没有该比赛解答！");
         }
     }
+
+    private void setCode(User_SolutionOfCompetition user_solutionOfCompetition){
+        String code = tools.readFile(user_solutionOfCompetition.getSolutionOfCompetition().getCode());
+        user_solutionOfCompetition.getSolutionOfCompetition().setCode(code);
+    }
+
 }

@@ -22,48 +22,10 @@ public class ProblemServiceImpl implements ProblemService {
     @Resource(name = "ProblemDao")
     private ProblemDao problemDao;
     @Override
-    public void save(Problem entity) {
-
-    }
-
-    @Override
-    public void update(Problem entity) {
-
-    }
-
-    @Override
-    public void delete(Serializable id) {
-
-    }
-
-    @Override
-    public Problem getById(Serializable id) {
-        return null;
-    }
-
-    @Override
-    public Result searchProblemByGet(String problemId) {
-        int id = Integer.parseInt(problemId);
-        Problem problem = null;
-        try {
-            problem = problemDao.searchProblemById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false,e.toString());
-        }
-
-        if (problem!=null){
-            return new Result(true, JSON.toJSON(problem).toString());
-        }else {
-            return new Result(false,"没有该题号的题目");
-        }
-    }
-
-    @Override
-    public Result addByPost(Problem problem) {
+    public Result save(Problem entity) {
         int insertRow = 0;
         try {
-            insertRow = problemDao.addProblem(problem);
+            insertRow = problemDao.addProblem(entity);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,e.toString());
@@ -77,32 +39,12 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
-    public Result searchProblemsByPage(int page, int problemsNum) {
-        List<Problem> problems = null;
-        int startNum = (page-1)*problemsNum;
-
-
-        HashMap<String,Integer> pageLimit = new HashMap<>();
-        pageLimit.put("startNum",startNum);
-        pageLimit.put("problemsNum",problemsNum);
-
-
-        try {
-            problems = problemDao.searchProblemsLimit(pageLimit);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false,e.toString());
-        }
-
-        if (problems!=null){
-            return new Result(true, JSON.toJSON(problems).toString());
-        }else {
-            return new Result(false,"没有更多的题目了");
-        }
+    public Result update(Problem entity) {
+return null;
     }
 
     @Override
-    public Result RemoveProblemById(int id) {
+    public Result deleteById(Integer id) {
         int deleteRow = 0;
         try {
             deleteRow = problemDao.deleteProblemById(id);
@@ -119,7 +61,48 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
-    public Result searchProblemCount() {
+    public Result getById(Integer id) {
+        Problem problem = null;
+        try {
+            problem = problemDao.searchProblemById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,e.toString());
+        }
+        if (problem!=null){
+            return new Result(true, JSON.toJSON(problem).toString());
+        }else {
+            return new Result(false,"没有该题号的题目");
+        }
+    }
+
+    @Override
+    public Result searchByPage(Integer page, Integer pageNum) {
+        List<Problem> problems = null;
+        int startNum = (page-1)*pageNum;
+        HashMap<String,Integer> pageLimit = new HashMap<>();
+        pageLimit.put("startNum",startNum);
+        pageLimit.put("problemsNum",pageNum);
+        try {
+            problems = problemDao.searchProblemsLimit(pageLimit);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,e.toString());
+        }
+        if (problems!=null){
+            return new Result(true, JSON.toJSON(problems).toString());
+        }else {
+            return new Result(false,"没有更多的题目了");
+        }
+    }
+
+    @Override
+    public Result searchResentEntity(Integer searchNum) {
+        return null;
+    }
+
+    @Override
+    public Result searchCount() {
         int countNum = 0;
         try {
             countNum = problemDao.searchCount();

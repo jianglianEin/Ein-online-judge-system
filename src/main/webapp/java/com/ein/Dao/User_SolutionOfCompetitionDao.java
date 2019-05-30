@@ -21,7 +21,7 @@ public interface User_SolutionOfCompetitionDao extends BaseDao<User_SolutionOfCo
             @Result(column = "times", property = "times", jdbcType = JdbcType.INTEGER),
             @Result(column = "state", property = "state", jdbcType = JdbcType.VARCHAR)
     })
-    public List<User_SolutionOfCompetition> searchUser_SolutionsOfCompetitionByUser(String user_id) throws Exception;
+    public List<User_SolutionOfCompetition> searchUser_SolutionsOfCompetitionByUser(int user_id) throws Exception;
 
     @Insert("insert into user_solutionOfCompetition_db(user_id,solutionOfCompetition_id,postDate,times,state) values " +
             "(#{user.id},#{solutionOfCompetition.id},#{postDate},#{times},#{state})")

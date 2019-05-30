@@ -39,8 +39,8 @@ public class NoticController {
     @ResponseBody
     @RequestMapping(value = "/showDetailedNotic",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String showDetailedNotic(HttpServletRequest request,
-                                    @RequestParam("bbsId")String bbsId){
-        Result result = bbsService.searchBBSByGet(bbsId);
+                                    @RequestParam("bbsId")int bbsId){
+        Result result = bbsService.getById(bbsId);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
         }else {
@@ -57,7 +57,7 @@ public class NoticController {
                       @RequestParam("title")String title) throws Exception {
         Result userResult = userService.getUserByUsername(Lz_name);
         BBS bbs = prepareNewBBS(userResult,discription,startDate,title);
-        Result result = bbsService.addByPost(bbs);
+        Result result = bbsService.save(bbs);
         return JSON.toJSON(result).toString();
     }
 
@@ -79,17 +79,17 @@ public class NoticController {
     @RequestMapping(value = "/reply",method= RequestMethod.POST,produces="text/html;charset=UTF-8")
     public String reply(HttpServletRequest request,
                       @RequestParam("username")String username,
-                      @RequestParam("bbsId")String bbsId,
+                      @RequestParam("bbsId")int bbsId,
                       @RequestParam("msg")String msg,
                       @RequestParam("postDate")String postDate) throws Exception {
         Result userResult = userService.getUserByUsername(username);
         User user = (User) tools.analysisResult(userResult,User.class);
 
-        Result bbsResult = bbsService.searchBBSByGet(bbsId);
+        Result bbsResult = bbsService.getById(bbsId);
         BBS bbs = (BBS) tools.analysisResult(bbsResult,BBS.class);
 
         User_BBS user_bbs = prepareNewReply(user,bbs,msg,postDate);
-        Result result = bbsService.addReplyByPost(user_bbs);
+        Result result = bbsService.addReply(user_bbs);
         return JSON.toJSON(result).toString();
     }
 
@@ -111,7 +111,7 @@ public class NoticController {
     public String getNotics(HttpServletRequest request,
                             @RequestParam("pageNum")int page,
                             @RequestParam("bbsNum")int bbsNum){
-        Result result = bbsService.searchBBSByPage(page,bbsNum);
+        Result result = bbsService.searchByPage(page,bbsNum);
         return JSON.toJSON(result).toString();
     }
 
@@ -125,7 +125,7 @@ public class NoticController {
     @ResponseBody
     @RequestMapping(value = "/getCount",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String getCount(){
-        Result result = bbsService.searchBBSCount();
+        Result result = bbsService.searchCount();
         return JSON.toJSON(result).toString();
     }
 
@@ -133,7 +133,7 @@ public class NoticController {
     @RequestMapping(value = "/delete",method=RequestMethod.POST,produces="text/html;charset=UTF-8")
     public String delete(HttpServletRequest request,
                          @RequestParam("bbsId")int id) throws Exception {
-        Result result = bbsService.RemoveBBSById(id);
+        Result result = bbsService.deleteById(id);
         if (result.isSuccess()){
             return JSON.toJSON(result).toString();
         }else {
@@ -145,7 +145,7 @@ public class NoticController {
     @RequestMapping(value = "/get_resent_notic",method= RequestMethod.GET,produces="text/html;charset=UTF-8")
     public String get_resent_notic(){
         int searchNum = 5;
-        Result result = bbsService.get_resent_notic(searchNum);
+        Result result = bbsService.searchResentEntity(searchNum);
         return JSON.toJSON(result).toString();
     }
 }

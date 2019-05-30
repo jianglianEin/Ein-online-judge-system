@@ -33,7 +33,7 @@ public class User_SolutionOfCompetitionDaoImpl implements User_SolutionOfCompeti
     }
 
     @Override
-    public List<User_SolutionOfCompetition> searchUser_SolutionsOfCompetitionByUser(String user_id) throws Exception {
+    public List<User_SolutionOfCompetition> searchUser_SolutionsOfCompetitionByUser(int user_id) throws Exception {
         SqlSession sqlSession = sqlSessionFactoryUtil.openSqlSession();
 
         List<User_SolutionOfCompetition> user_solutionOfCompetitions = null;

@@ -27,53 +27,14 @@ public class BBSServiceImpl implements BBSService {
     private User_BBSDao user_bbsDao;
 
     @Override
-    public void save(BBS entity) {
-
-    }
-
-    @Override
-    public void update(BBS entity) {
-
-    }
-
-    @Override
-    public void delete(Serializable id) {
-
-    }
-
-    @Override
-    public BBS getById(Serializable id) {
-        return null;
-    }
-
-    @Override
-    public Result searchBBSByGet(String bbsId) {
-        int id = Integer.parseInt(bbsId);
-        BBS bbs = null;
-        try {
-            bbs = bbsDao.searchBBSById(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false,e.toString());
-        }
-
-        if (bbs!=null){
-            return new Result(true, JSON.toJSON(bbs).toString());
-        }else {
-            return new Result(false,"没有该讨论！");
-        }
-    }
-
-    @Override
-    public Result addByPost(BBS bbs) {
+    public Result save(BBS entity) {
         int insertRow = 0;
         try {
-            insertRow = bbsDao.addBBS(bbs);
+            insertRow = bbsDao.addBBS(entity);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,e.toString());
         }
-
         if (insertRow==0){
             return new Result(false,"添加讨论失败");
         }else {
@@ -82,32 +43,12 @@ public class BBSServiceImpl implements BBSService {
     }
 
     @Override
-    public Result searchBBSByPage(int page, int bbsNum) {
-        List<BBS> bbsList = null;
-        int startNum = (page-1)*bbsNum;
-
-
-        HashMap<String,Integer> pageLimit = new HashMap<>();
-        pageLimit.put("startNum",startNum);
-        pageLimit.put("bbsNum",bbsNum);
-
-
-        try {
-            bbsList = bbsDao.searchBBSLimit(pageLimit);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false,e.toString());
-        }
-
-        if (bbsList!=null){
-            return new Result(true, JSON.toJSON(bbsList).toString());
-        }else {
-            return new Result(false,"没有更多的讨论了");
-        }
+    public Result update(BBS entity) {
+return null;
     }
 
     @Override
-    public Result RemoveBBSById(int id) {
+    public Result deleteById(Integer id) {
         int deleteRow = 0;
         try {
             deleteRow = bbsDao.deleteBBSById(id);
@@ -115,7 +56,6 @@ public class BBSServiceImpl implements BBSService {
             e.printStackTrace();
             return new Result(false,e.toString());
         }
-
         if (deleteRow==0){
             return new Result(false,"删除讨论失败");
         }else {
@@ -124,7 +64,43 @@ public class BBSServiceImpl implements BBSService {
     }
 
     @Override
-    public Result get_resent_notic(int searchNum) {
+    public Result getById(Integer id) {
+        BBS bbs = null;
+        try {
+            bbs = bbsDao.searchBBSById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,e.toString());
+        }
+        if (bbs!=null){
+            return new Result(true, JSON.toJSON(bbs).toString());
+        }else {
+            return new Result(false,"没有该讨论！");
+        }
+    }
+
+    @Override
+    public Result searchByPage(Integer page, Integer pageNum) {
+        List<BBS> bbsList = null;
+        int startNum = (page-1)*pageNum;
+        HashMap<String,Integer> pageLimit = new HashMap<>();
+        pageLimit.put("startNum",startNum);
+        pageLimit.put("bbsNum",pageNum);
+        try {
+            bbsList = bbsDao.searchBBSLimit(pageLimit);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,e.toString());
+        }
+        if (bbsList!=null){
+            return new Result(true, JSON.toJSON(bbsList).toString());
+        }else {
+            return new Result(false,"没有更多的讨论了");
+        }
+    }
+
+    @Override
+    public Result searchResentEntity(Integer searchNum) {
         List<BBS> bbsList = null;
         try {
             bbsList = bbsDao.searchBBSByTopNum(searchNum);
@@ -140,7 +116,7 @@ public class BBSServiceImpl implements BBSService {
     }
 
     @Override
-    public Result searchBBSCount() {
+    public Result searchCount() {
         int countNum = 0;
         try {
             countNum = bbsDao.searchCount();
@@ -157,7 +133,7 @@ public class BBSServiceImpl implements BBSService {
     }
 
     @Override
-    public Result addReplyByPost(User_BBS user_bbs) {
+    public Result addReply(User_BBS user_bbs) {
         int insertRow = 0;
         try {
             insertRow = user_bbsDao.addUser_BBS(user_bbs);
@@ -175,7 +151,6 @@ public class BBSServiceImpl implements BBSService {
 
     @Override
     public Result searchReplyByBBSId(int bbsId) {
-        System.out.println("in searchReplyByBBSId");
         List<User_BBS> user_bbsList = null;
 
         try {

@@ -21,104 +21,16 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void save(User entity) {
-
+    public Result save(User entity) {
+return null;
     }
 
     @Override
-    public void update(User entity) {
-
-    }
-
-    @Override
-    public void delete(Serializable id) {
-
-    }
-
-    @Override
-    public User getById(Serializable id) {
-        return null;
-    }
-
-    @Override
-    public Result loginByPost(String username, String password) {
-        System.out.println("In userservice loginByPost");
-        User user = null;
-        try {
-            user = userDao.searchUserByUserName(username);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false,e.toString());
-        }
-
-        if (user!=null&&user.getPassword().equals(password)){
-
-            user.setPassword("");
-            if (user.getIcon()==null||user.getIcon().isEmpty()){
-                user.setIcon("img/user_icon/no_user.jpg");
-//                System.out.println("icon=" + user.getIcon());
-            }
-            String jsonStr = JSON.toJSON(user).toString();
-            return  new Result(true,jsonStr);
-        }else {
-            return new Result(false,"login failed");
-        }
-    }
-
-    @Override
-    public Result getUserByUsername(String username) {
-        User user = null;
-        try {
-            user = userDao.searchUserByUserName(username);
-        } catch (Exception e) {
-            return new Result(false,e.toString());
-        }
-        user.setPassword("");
-        if (user.getIcon()==null||user.getIcon().isEmpty()){
-            user.setIcon("img/user_icon/no_user.jpg");
-//            System.out.println("icon=" + user.getIcon());
-        }
-        if (user!=null){
-            return new Result(true,JSON.toJSON(user).toString());
-        }
-        return new Result(false,"there is no this user");
-    }
-
-    @Override
-    public Result registerByPost(User newUser) {
-        User user = null;
-        User user1 = null;
+    public Result update(User entity) {
         int updataRow = 0;
-        try {
-            user = userDao.searchUserByStudentId(newUser.getStudentId());
-            user1 = userDao.searchUserByUserName(newUser.getUsername());
-        } catch (Exception e) {
-            return new Result(false,e.toString());
-        }
-        if (user!=null&&user.getUsername()==null&&user1==null){
+        if (entity!=null){
             try {
-                updataRow = userDao.updataUserProvider(newUser);
-            } catch (Exception e) {
-                return new Result(false,"该用户名已经被创建");
-            }
-        }else {
-            return new Result(false,"该学号的对象已经完成注册或者该用户名已经被创建");
-        }
-
-        if (updataRow!=0){
-            return new Result(true,""+updataRow);
-        }else {
-            return new Result(false,"没有该学号的对象");
-        }
-
-    }
-
-    @Override
-    public Result changeMsgByPost(User user) {
-        int updataRow = 0;
-        if (user!=null){
-            try {
-                updataRow = userDao.updataUserProvider(user);
+                updataRow = userDao.updataUserProvider(entity);
             } catch (Exception e) {
                 return new Result(false,e.toString());
             }
@@ -133,58 +45,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result getPasswordByStudentId(String studentId) {
-        User user = null;
-        try {
-            user = userDao.searchUserByStudentId(studentId);
-        } catch (Exception e) {
-            return new Result(false,e.toString());
-        }
-
-        if (user!=null){
-            return new Result(true,user.getPassword());
-        }else {
-            return new Result(false,"没有该学号的对象");
-        }
-
+    public Result deleteById(Integer id) {
+return null;
     }
 
     @Override
-    public Result get_resent_rank(int searchNum) {
-        List<User> userList = null;
-        try {
-            userList = userDao.searchRankByTopNum(searchNum);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Result(false,e.toString());
-        }
-        if (userList!=null){
-            for (User user:userList
-                 ) {
-                user.setPassword("");
-                if (user.getDiscription()==null){
-                    user.setDiscription("还没有留言，快去写写吧");
-                }
-            }
-            return new Result(true, JSON.toJSON(userList).toString());
-        }else {
-            return new Result(false,"没有用户！");
-        }
-    }
-
-    @Override
-    public Result getUserById(int id) {
+    public Result getById(Integer id) {
         User user = null;
         try {
             user = userDao.searchUserById(id);
         } catch (Exception e) {
             return new Result(false,e.toString());
         }
+
         user.setPassword("");
-        if (user.getIcon()==null||user.getIcon().isEmpty()){
-            user.setIcon("img/user_icon/no_user.jpg");
-//            System.out.println("icon=" + user.getIcon());
-        }
         if (user!=null){
             return new Result(true,JSON.toJSON(user).toString());
         }
@@ -192,32 +66,114 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result searchUserCount() {
-        int countNum = 0;
+    public Result loginByPost(String username, String password) {
+        User user = null;
         try {
-            countNum = userDao.searchCount();
+            user = userDao.searchUserByUserName(username);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false,e.toString());
         }
 
-        if (countNum!=0){
-            return new Result(true, ""+countNum);
+        if (user != null && user.getPassword().equals(password)){
+            user.setPassword("");
+            return  new Result(true, JSON.toJSON(user).toString());
         }else {
-            return new Result(false,"user数据库为空");
+            return new Result(false,"login failed");
         }
     }
 
     @Override
-    public Result searchRankByPage(int pageNum, int rankNum) {
+    public Result getUserByUsername(String username) {
+        User user = null;
+        try {
+            user = userDao.searchUserByUserName(username);
+        } catch (Exception e) {
+            return new Result(false,e.toString());
+        }
+        user.setPassword("");
+        if (user!=null){
+            return new Result(true,JSON.toJSON(user).toString());
+        }
+        return new Result(false,"there is no this user");
+    }
+
+    @Override
+    public Result registerByPost(User newUser) {
+        boolean isRegisterUserLegal = false;
+        try {
+            isRegisterUserLegal = isRegisterUserLegal(newUser);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,"用户查询错误");
+        }
+
+        int updataRow = 0;
+        if (isRegisterUserLegal){
+            try {
+                setDefaultUserValues(newUser);
+                updataRow = userDao.updataUserProvider(newUser);
+            } catch (Exception e) {
+                return new Result(false,"注册用户数据写入失败");
+            }
+        }else {
+            return new Result(false,"注册用户非法");
+        }
+
+        if (updataRow != 0){
+            return new Result(true,""+updataRow);
+        }else {
+            return new Result(false,"注册用户数据写入失败");
+        }
+    }
+
+    private void setDefaultUserValues(User newUser){
+        newUser.setIcon("img/user_icon/no_user.jpg");
+        newUser.setDiscription("请添加您有相关描述，让大家更加了解你吧");
+    }
+
+    private boolean isRegisterUserLegal(User newUser) throws Exception {
+        User cheakUserStudentId = userDao.searchUserByStudentId(newUser.getStudentId());
+        boolean isStudentIdLegal = cheakUserStudentId != null
+                &&cheakUserStudentId.getUsername() == null;
+        if (isStudentIdLegal){
+            User cheakUserUsername = userDao.searchUserByUserName(newUser.getUsername());
+            boolean isUsernameLegal = cheakUserUsername == null;
+            return isUsernameLegal;
+        }else {
+            return isStudentIdLegal;
+        }
+    }
+
+    public Result confirmPassword(String studentId, String old_password, String password){
+        User user = null;
+        try {
+            user = userDao.searchUserByStudentId(studentId);
+        } catch (Exception e) {
+            return new Result(false,e.toString());
+        }
+
+        if (user != null){
+            boolean confirmPassword = user.getPassword().equals(old_password);
+            if (confirmPassword){
+                return new Result(true,password);
+            }else {
+                return new Result(false,"密码错误");
+            }
+        }else {
+            return new Result(false,"无该用户");
+        }
+    }
+
+    @Override
+    public Result searchByPage(Integer page, Integer pageNum) {
         List<User> userList = null;
-        int startNum = (pageNum-1)*rankNum;
+        int startNum = (pageNum-1)*pageNum;
 
 
         HashMap<String,Integer> pageLimit = new HashMap<>();
         pageLimit.put("startNum",startNum);
-        pageLimit.put("rankNum",rankNum);
-
+        pageLimit.put("rankNum",pageNum);
 
         try {
             userList = userDao.searchRankLimitOrderByPassNum(pageLimit);
@@ -230,6 +186,42 @@ public class UserServiceImpl implements UserService {
             return new Result(true, JSON.toJSON(userList).toString());
         }else {
             return new Result(false,"没有更多的用户了");
+        }
+    }
+
+    @Override
+    public Result searchResentEntity(Integer searchNum) {
+        List<User> userList = null;
+        try {
+            userList = userDao.searchRankByTopNum(searchNum);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,e.toString());
+        }
+        if (userList!=null){
+            for (User user:userList) {
+                user.setPassword("");
+            }
+            return new Result(true, JSON.toJSON(userList).toString());
+        }else {
+            return new Result(false,"没有用户！");
+        }
+    }
+
+    @Override
+    public Result searchCount() {
+        int countNum = 0;
+        try {
+            countNum = userDao.searchCount();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false,e.toString());
+        }
+
+        if (countNum!=0){
+            return new Result(true, ""+countNum);
+        }else {
+            return new Result(false,"user数据库为空");
         }
     }
 }
