@@ -2,321 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a8f56a9f-6d6a-41c1-9b5d-8c55c9487d48" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_beta_3.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/oj_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/oj_war.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/oj_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/oj_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4b61e4fe-fab8-49ef-b4d5-006a2beb6bb2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_beta_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/oj.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/resources/SqlMapperConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/resources/SqlMapperConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/SqlMapperConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/applicationContext.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Controller/CompetitionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Controller/NoticController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Controller/ProblemController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Controller/SolutionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Controller/UploadController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/BBSDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/BaseDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/CompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Competition_ProblemDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/ProblemDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/CompetitionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/CompetitionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/ProblemDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/ProblemDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/SolutionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/SolutionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/SolutionOfCompetitionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/SolutionOfCompetitionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/UserDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/UserDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/User_SolutionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/User_SolutionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/User_SolutionOfCompetitionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/Provider/User_SolutionOfCompetitionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/SolutionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/SolutionOfCompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/UserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/User_BBSDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/User_CompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/User_SolutionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Dao/User_SolutionOfCompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/BBSDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/BaseDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/CompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/Competition_ProblemDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/ProblemDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/SolutionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/SolutionOfCompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/UserDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/User_BBSDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/User_CompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/User_SolutionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/DaoImpl/User_SolutionOfCompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/BBS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/Competition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/Competition_Problem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/Problem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/Solution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/SolutionOfCompetition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/User_BBS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/User_Competition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/User_Solution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Model/User_SolutionOfCompetition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Service/BBSService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Service/BaseService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Service/CompetitionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Service/ProblemService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Service/SolutionOfCompetitionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Service/SolutionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/ServiceImpl/BBSServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/ServiceImpl/CompetitionServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/ServiceImpl/ProblemServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/ServiceImpl/SolutionOfCompetitionServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/ServiceImpl/SolutionServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/ServiceImpl/UserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Utils/DeleteDirectory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Utils/JavaShellUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Utils/Result.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Utils/Tools.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/Utils/sqlSessionFactoryUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/test/Tools_test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/test/code_test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/ein/test/db_test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/db.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/SqlMapperConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/applicationContext.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Controller/CompetitionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Controller/NoticController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Controller/ProblemController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Controller/SolutionController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Controller/UploadController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Controller/UserController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/BBSDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/BaseDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/CompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Competition_ProblemDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/ProblemDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/CompetitionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/CompetitionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/ProblemDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/ProblemDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/SolutionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/SolutionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/SolutionOfCompetitionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/SolutionOfCompetitionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/UserDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/UserDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/User_SolutionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/User_SolutionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/User_SolutionOfCompetitionDaoProvider$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/Provider/User_SolutionOfCompetitionDaoProvider.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/SolutionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/SolutionOfCompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/UserDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/User_BBSDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/User_CompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/User_SolutionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Dao/User_SolutionOfCompetitionDao.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/BBSDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/BaseDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/CompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/Competition_ProblemDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/ProblemDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/SolutionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/SolutionOfCompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/UserDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/User_BBSDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/User_CompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/User_SolutionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/DaoImpl/User_SolutionOfCompetitionDaoImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/BBS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/Competition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/Competition_Problem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/Problem.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/Solution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/SolutionOfCompetition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/User.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/User_BBS.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/User_Competition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/User_Solution.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Model/User_SolutionOfCompetition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Service/BBSService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Service/BaseService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Service/CompetitionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Service/ProblemService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Service/SolutionOfCompetitionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Service/SolutionService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Service/UserService.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/ServiceImpl/BBSServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/ServiceImpl/CompetitionServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/ServiceImpl/ProblemServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/ServiceImpl/SolutionOfCompetitionServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/ServiceImpl/SolutionServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/ServiceImpl/UserServiceImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Utils/DeleteDirectory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Utils/JavaShellUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Utils/Result.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Utils/Tools.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/Utils/sqlSessionFactoryUtil.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/test/Tools_test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/test/code_test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/com/ein/test/db_test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/db.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/classes/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/c3p0-0.9.5.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/commons-fileupload-1.3.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/commons-io-2.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/concordion-spring-runner-1.0.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/fastjson-1.2.49.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/hamcrest-core-1.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/jackson-core-2.9.6.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/jackson-core-asl-1.9.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/jackson-mapper-asl-1.9.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/jaudiotagger-2.0.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/jid3lib-0.5.4.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/jquery-3.3.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/json-20180813.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/json2-20140204.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/jstl-1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/junit-4.13-beta-2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/mchange-commons-java-0.2.11.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/mybatis-3.4.6.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/mybatis-spring-1.3.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/mysql-connector-java-8.0.12.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/protobuf-java-2.6.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-aop-5.0.8.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-beans-5.0.9.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-context-5.0.8.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-core-5.0.9.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-expression-5.0.8.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-jcl-5.0.9.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-jdbc-5.0.9.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-tx-5.0.9.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-web-5.0.8.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/spring-webmvc-5.0.8.RELEASE.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/resources/SqlMapperConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/resources/applicationContext.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/resources/db.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/resources/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/WEB-INF/web.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/code/language/cpp/jianglianEin/method1.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/code/language/java/jianglianEin/method1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/css/app.0a4cf4d21059f90a2e4e628a8aea907c.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/fonts/element-icons.6f0a763.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/block1.691d92f.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/block2.aaa2e8c.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/help_bg.1a04f4c.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/images_1.2d82352.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/images_2.a8af711.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/images_3.2edad50.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/images_4.e7b9f6a.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/img/right_image.cd769cb.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/js/app.0dccd05a484b4bfe88c1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/js/demo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/js/jquery-1.11.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/js/jquery.particleground.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/js/manifest.f50870fb1aae05fa4e14.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/js/vendor.e485926dbb4c1ca565ad.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/dist/static/media/introduce.97d4246.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/img/user_icon/2019052822261354191467_p0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/img/user_icon/2019052919485550479273_p0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/img/user_icon/no_user.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Controller/CompetitionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Controller/NoticController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Controller/ProblemController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Controller/SolutionController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Controller/UploadController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Controller/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/BBSDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/BaseDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/CompetitionDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Competition_ProblemDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/ProblemDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Provider/CompetitionDaoProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Provider/ProblemDaoProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Provider/SolutionDaoProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Provider/SolutionOfCompetitionDaoProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Provider/UserDaoProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Provider/User_SolutionDaoProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/Provider/User_SolutionOfCompetitionDaoProvider.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/SolutionDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/SolutionOfCompetitionDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/UserDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/User_BBSDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/User_CompetitionDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/User_SolutionDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Dao/User_SolutionOfCompetitionDao.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/BBSDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/BaseDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/CompetitionDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/Competition_ProblemDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/ProblemDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/SolutionDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/SolutionOfCompetitionDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/UserDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/User_BBSDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/User_CompetitionDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/User_SolutionDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/DaoImpl/User_SolutionOfCompetitionDaoImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/BBS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/Competition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/Competition_Problem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/Problem.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/Solution.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/SolutionOfCompetition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/User_BBS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/User_Competition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/User_Solution.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Model/User_SolutionOfCompetition.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Service/BBSService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Service/BaseService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Service/CompetitionService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Service/ProblemService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Service/SolutionOfCompetitionService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Service/SolutionService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/ServiceImpl/BBSServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/ServiceImpl/CompetitionServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/ServiceImpl/ProblemServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/ServiceImpl/SolutionOfCompetitionServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/ServiceImpl/SolutionServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/ServiceImpl/UserServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Utils/DeleteDirectory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Utils/JavaShellUtils.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Utils/Result.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Utils/Tools.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/Utils/sqlSessionFactoryUtil.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/test/Tools_test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/test/code_test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/java/com/ein/test/db_test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/question/1/input/input1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/question/1/input/input2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/question/1/output/output1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/oj/question/1/output/output2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dump.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/resources/db.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="oj_system@localhost" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="oj_system@localhost" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -326,6 +46,7 @@
   <component name="ProjectId" id="1PKEKbfpc4PcdE7kXhlAdCSl8VD" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -407,6 +128,21 @@
       </method>
     </configuration>
   </component>
+  <component name="ServiceViewManager">
+    <option name="allServicesViewState">
+      <serviceView>
+        <treeState>
+          <expand>
+            <path>
+              <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+              <item name="com.intellij.execution.services.ServiceModel$ServiceGroupNode@79854752" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+            </path>
+          </expand>
+          <select />
+        </treeState>
+      </serviceView>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -417,8 +153,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1565614324193</updated>
-      <workItem from="1565614328372" duration="1259000" />
+      <workItem from="1565614328372" duration="2650000" />
     </task>
+    <task id="LOCAL-00001" summary="[JiShi] fixed mvn data">
+      <created>1565616417469</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1565616417469</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

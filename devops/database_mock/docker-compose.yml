@@ -1,0 +1,19 @@
+version: '3'
+services:
+  oj_system_db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'oj_system'
+      MYSQL_USER: 'oj_system'
+      MYSQL_PASSWORD: 'ft1998226'
+      MYSQL_ROOT_PASSWORD: 'ft1998226'
+    ports:
+      - '33061:3306'
+    expose:
+      - '3306'
+    volumes:
+      - oj_system_db:/var/lib/mysql
+# Names our volume
+volumes:
+  oj_system_db:
