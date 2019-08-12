@@ -13,9 +13,6 @@
                 <property name="url" value="${dataSource.jdbcUrl}"/>
                 <property name="username" value="${dataSource.user}"/>
                 <property name="password" value="${dataSource.password}"/>
-                <!--<property name="initialPoolSize" value="${dataSource.initialPoolSize}"/>-->
-                <!--<property name="maxPoolSize" value="${dataSource.maxPoolSize}"/>-->
-                <!--<property name="mshaaxIdleTime" value="${dataSource.maxIdleTime}"/>-->
             </dataSource>
         </environment>
     </environments>
